@@ -1,10 +1,20 @@
 import { deleteDocument, insertDocument } from "./index.js";
+import { getCookie } from "./utils/cookies.js";
 
 // eslint-disable-next-line no-undef
-const socket = io("http://localhost:8000");
+const socket = io("http://localhost:8000/start", {
+	auth: {
+		token: getCookie("token")
+	}
+});
 
 socket.on("connect", () => {
 	console.log("server connected");
+});
+
+socket.on("connect_error", (error) => {
+	window.alert(error.message);
+	window.location.href = "/login/index.html";
 });
 
 socket.on("document:created", (document) => {
