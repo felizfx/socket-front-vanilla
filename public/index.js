@@ -8,8 +8,13 @@ getDocumets();
 
 btnForms.addEventListener("click", (e) => {
 	e.preventDefault();
-	createDocument(inputInsertDocument.value);
-	inputInsertDocument.value = "";
+	if(inputInsertDocument.value.length != 0) {
+		console.log("vazio");
+		createDocument(inputInsertDocument.value);
+		inputInsertDocument.value = "";
+		return;
+	}
+	window.alert("insira um valor");
 });
 
 export function insertDocument(name) {
