@@ -1,4 +1,4 @@
-import { txt, userTexting } from "./documento.js";
+import { addUser, documentName, removeUser, txt, userTexting } from "./documento.js";
 import { getCookie } from "../utils/cookies.js";
 
 // eslint-disable-next-line no-undef
@@ -23,7 +23,6 @@ socket.on("disconnect", (reason) => {
 });
 
 socket.on("document:txt-receiving", value => {
-	console.log("bah");
 	txt.value = value;
 });
 
@@ -35,10 +34,24 @@ socket.on("document:current-deleted", () => {
 	return window.location.href = "/";
 });
 
-export function emitRoom (name) {
+socket.on("document:verified-user", (user) => {
+	emitRoom(documentName, user);
+});
+
+socket.on("document:user-connected", (listUsers) => {
+	addUser(listUsers);
+});
+
+socket.on("document:user-disconnected", (name) => {
+	console.log("saiu");
+	removeUser(name);
+});
+
+export function emitRoom (name, user) {
 	socket.emit("document:select", name, (value) => {
 		txt.value = value;
 	});
+	socket.emit("document:user-connecting", user, documentName);
 }
 
 export function emitText(value, name) {
