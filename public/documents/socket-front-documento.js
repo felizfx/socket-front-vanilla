@@ -34,7 +34,7 @@ socket.on("document:current-deleted", () => {
 	return window.location.href = "/";
 });
 
-socket.on("document:verified-user", (user) => {
+socket.on("user:verified-user", (user) => {
 	emitRoom(documentName, user);
 });
 
@@ -43,7 +43,6 @@ socket.on("document:user-connected", (listUsers) => {
 });
 
 socket.on("document:user-disconnected", (name) => {
-	console.log("saiu");
 	removeUser(name);
 });
 

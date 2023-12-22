@@ -1,4 +1,5 @@
 import { emitDelete, emitText } from "./socket-front-documento.js";
+// import { emitChat } from "../chats/socket-front-chat.js";
 
 const params = new URLSearchParams(window.location.search);
 export const documentName = params.get("nome");
@@ -25,13 +26,13 @@ deleteBtn.addEventListener("click", () => {
 function addUser(list) {
 	userList.innerHTML = "";
 	list.forEach((value) => {
-		userList.innerHTML += `<li class="list-group-item" id="user-${value.user}">${value.user}</li>`;
+		userList.innerHTML += `<a href="http://localhost:3000/chats/index.html?user=${value.user.id}&name=${value.user.name}" class="list-group-item list-group-item-action" id="${value.user.id}">${value.user.name}</a>`;
 	});
 }
 
 function removeUser(username) {
-	const user = document.getElementById(`user-${username}`);
-	userList.removeChild(user);
+	const user = document.getElementById(`${username}`);
+	// userList.removeChild(user);
 }
 
 export { txt, userTexting, addUser, removeUser };
