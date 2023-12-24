@@ -1,12 +1,14 @@
 import { createDocument, getDocumets } from "./socket-front-index.js";
+import { deleteCookie } from "./utils/cookies.js";
 
 const documentsList = document.getElementById("lista-documentos");
 const inputInsertDocument = document.getElementById("input-documento");
-const btnForms = document.getElementById("send-forms");
+const forms = document.getElementById("form-adiciona-documento");
+const btnLogout = document.getElementById("botao-logout");
 
 getDocumets();
 
-btnForms.addEventListener("click", (e) => {
+forms.addEventListener("submit", (e) => {
 	e.preventDefault();
 	if(inputInsertDocument.value.length != 0) {
 		console.log("vazio");
@@ -17,8 +19,18 @@ btnForms.addEventListener("click", (e) => {
 	window.alert("insira um valor");
 });
 
+btnLogout.addEventListener("click", () => {
+	deleteCookie("token");
+	window.location.href = "login/index.html";
+});
+
+btnLogout.addEventListener("click", () => {
+	deleteCookie("token");
+	window.location.href = "login/index.html";
+});
+
 export function insertDocument(name) {
-	documentsList.innerHTML += `<a href="documento.html?nome=${name}" class="list-group-item list-group-item-action" id="document-${name}">
+	documentsList.innerHTML += `<a href="documents/index.html?nome=${name}" class="list-group-item list-group-item-action" id="document-${name}">
     ${name}
   </a>`;
 }
