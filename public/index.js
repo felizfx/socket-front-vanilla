@@ -5,23 +5,25 @@ const documentsList = document.getElementById("lista-documentos");
 const inputInsertDocument = document.getElementById("input-documento");
 const forms = document.getElementById("form-adiciona-documento");
 const btnLogout = document.getElementById("botao-logout");
+const userList = document.getElementById("usuarios-conectados");
 
 getDocumets();
 
 forms.addEventListener("submit", (e) => {
 	e.preventDefault();
 	if(inputInsertDocument.value.length != 0) {
-		console.log("vazio");
-		createDocument(inputInsertDocument.value);
-		inputInsertDocument.value = "";
+		const doc = document.getElementById(`document-${inputInsertDocument.value}`);
+
+		if(!doc) {
+			createDocument(inputInsertDocument.value);
+			inputInsertDocument.value = "";
+			return;
+		}
+
+		window.alert("documento ja existente");
 		return;
 	}
 	window.alert("insira um valor");
-});
-
-btnLogout.addEventListener("click", () => {
-	deleteCookie("token");
-	window.location.href = "login/index.html";
 });
 
 btnLogout.addEventListener("click", () => {
@@ -45,3 +47,25 @@ export function deleteDocument(name) {
 		console.log(`Document with ID ${id} not found.`);
 	}
 }   
+
+export function addUsers(user) {
+	let userConneted = `<a href="http://localhost:3000/chats/index.html?user=${user._id}&name=${user.name}" class="list-group-item list-group-item-action" id="${user._id}">
+				<p class="txt-margin">${user.name}</p>
+				<span class="offline-indicator">offline</span>
+			</a>`;
+	userList.innerHTML += userConneted;
+}
+
+export function setOnline(user) {
+	const userLogged = document.getElementById(user.id);
+	let span = userLogged.querySelector("span");
+	span.className = "online-indicator";
+	span.innerHTML = "online";
+}
+
+export function setOffline(user) {
+	const userLogged = document.getElementById(user.id);
+	let span = userLogged.querySelector("span");
+	span.className = "offline-indicator";
+	span.innerHTML = "offline";
+}

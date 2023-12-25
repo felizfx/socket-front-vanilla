@@ -22,6 +22,11 @@ socket.on("chats:reciving-message", (message, author) => {
 	addMessage(message, author);
 });
 
+socket.on("connect_error", (error) => {
+	window.alert(error.message);
+	window.location.href = "/login/index.html";
+});
+
 export function emitRoom(name) {
 	socket.emit("chats:emit-room", name);
 }
@@ -37,3 +42,5 @@ export function getMessages(room) {
 export function emitMessage(author, receiver, message) {
 	socket.emit("chats:send-message", author, receiver, message, room);
 }
+
+export default socket;
