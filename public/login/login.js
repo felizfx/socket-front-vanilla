@@ -8,7 +8,7 @@ form.addEventListener("submit", (e) => {
 	const email = form["input-email"].value;
 	const password = form["input-senha"].value;
 
-	fetch("http://localhost:8000/login", {
+	fetch("https://express-api-socket.onrender.com/login", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json"

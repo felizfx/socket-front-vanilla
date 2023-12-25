@@ -5,7 +5,7 @@ import { addMessage, userid } from "./chats.js";
 export var room = 0;
 
 // eslint-disable-next-line no-undef
-const socket = io("http://localhost:8000/chats", {
+const socket = io("https://express-api-socket.onrender.com/chats", {
 	auth: {
 		token: getCookie("token")
 	}

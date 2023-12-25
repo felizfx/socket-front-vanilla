@@ -16,7 +16,7 @@ form.addEventListener("submit", (e) => {
 		role: "user"
 	};
 
-	fetch("http://localhost:8000/signup", {
+	fetch("https://express-api-socket.onrender.com/signup", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json"

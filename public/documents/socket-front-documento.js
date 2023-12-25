@@ -2,7 +2,7 @@ import { addUser, documentName, removeUser, txt, userTexting } from "./documento
 import { getCookie } from "../utils/cookies.js";
 
 // eslint-disable-next-line no-undef
-const socket = io("http://localhost:8000/documents", {
+const socket = io("https://express-api-socket.onrender.com/documents", {
 	auth: {
 		token: getCookie("token")
 	}
