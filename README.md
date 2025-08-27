@@ -1,1 +1,1 @@
-escreva *npm run build* para rodar o projeto ;)
+escreva *npm run start* para rodar o projeto ;)
